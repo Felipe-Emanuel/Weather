@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Weather</title>
+</head>
+<body>
+    <div class="wheather container">
+        <div class="wheatherLeft container">
+          <div class="mainWeatherTop">
+            <div class="mainWeatherHeader">
+              <div class="mainWeatherCity">Experiencie o mundo...</div>
+              <div class="weatherConfig">
+                <button type="button" class="btnWeatherConfig C">° C</button>
+                <button type="button" class="btnWeatherConfig F">° F</button>
+              </div>
+            </div>
+            <div class="date">
+              <div class="mainWeatherMonth"></div>
+            </div>
+            <div class="mainWeatherContent">
+              <div class="mainWeatherSymbol">
+                <img class="mainSymbol" src="">
+              </div>
+              <div class="tempScreen">
+                  <div class="mainWeatherTemperature temp"></div>
+                  <div class="mainWeatherTemperature" id="tempSymbol">°c</div>
+              </div>
+              <div class="mainWeatherClimate"></div>
+              <span class="emoji">😎</span>
+            </div>
+            <div class="feelsLike"></div>
+            <div class="mainWeatherFooter">
+              <div class="mainWeatherMaxTemperature"></div>
+              <div class="mainWeatherToDoTip">Dica do que fazer neste clima</div>
+            </div>
+            <div class="showAndHideSliderBtn">
+              <button type="button" id="hideSliderWeather">←</button>
+              <button type="button" id="showSliderWeather">→</button>
+          </div>
+          </div>
+          <div class="wheatherMiddle">
+            <div class="today">
+              <div class="todayHeader">
+                <div class="todayTitle">
+                  <div class="todayDay">Hoje</div>
+                  <div class="todaySymbol">
+                    <img src="" alt="" id="todaySymbol">
+                  </div>
+                </div>
+                <div class="todayContent">
+                  <div class="todayMinMaxTemperature">
+                    <div class="todayMaxTemperature temp"></div>
+                    <div class="todayMinTemperature temp"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="todayFooter">
+                <div class="todayMoistureSymbol">💧</div>
+                <div class="todayMoisturePercent"></div>
+              </div>
+            </div>
+            <div class="tomorrow">
+              <div class="tomorrowHeader">
+                <div class="tomorrowTitle">
+                  <div class="tomorrowDay">Amanhã</div>
+                  <div class="tomorrowSymbol">
+                    <img src="" alt="" id="tomorrowSymbol">
+                  </div>
+                </div>
+                <div class="tomorrowContent">
+                  <div class="tomorrowMinMaxTemperature">
+                    <div class="tomorrowMaxTemperature temp"></div>
+                    <div class="tomorrowMinTemperature temp"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="tomorrowFooter">
+                <div class="tomorrowBePreaper">Preparese para o: "${clima}"</div>
+                <div class="tomorrowBePreaperSymbol">👀</div>
+              </div>
+            </div>
+          </div>
+          <div class="wheatherFooter">
+            <div class="FooterHeader">
+              <div class="FooterTitle">Previsão de 5 dias
+                <span>
+                  <button type="button" id="showForecast">↓</button>
+                </span>
+                <span>
+                  <button type="button" id="hideForecast">↑</button>
+                </span>
+              </div>
+            </div>
+            <div class="forecastOfDays">
+              <div class="days">
+                <div class="day-1">
+                  <div class="dayHeader" id="dayHeader1"></div>
+                  <div class="dayContent">
+                    <div class="dayTemperatureSymbol">
+                      <img src=""  id="day-1-symbol" class="nextDaySymbol">
+                    </div>
+                  <div class="footerMinMaxTemperature">
+                    <div class="dayMaxTemperature temp" id="forecastMaxTemperature1"></div>
+                    <div class="dayMinTemperature temp" id="forecastMinTemperature1"></div>
+                  </div>
+                  </div>
+                </div>
+                <div class="day-2">
+                  <div class="dayHeader" id="dayHeader2"></div>
+                  <div class="dayContent">
+                    <div class="dayTemperatureSymbol">
+                      <img src=""  id="day-2-symbol" class="nextDaySymbol">
+                    </div>
+                  <div class="footerMinMaxTemperature">
+                    <div class="dayMaxTemperature temp" id="forecastMaxTemperature2"></div>
+                    <div class="dayMinTemperature temp" id="forecastMinTemperature2"></div>
+                  </div>
+                  </div>
+                </div>
+                <div class="day-3">
+                  <div class="dayHeader" id="dayHeader3"></div>
+                  <div class="dayContent">
+                    <div class="dayTemperatureSymbol">
+                      <img src=""  id="day-3-symbol" class="nextDaySymbol">
+                    </div>
+                  <div class="footerMinMaxTemperature">
+                    <div class="dayMaxTemperature temp" id="forecastMaxTemperature3"></div>
+                    <div class="dayMinTemperature temp" id="forecastMinTemperature3"></div>
+                  </div>
+                  </div>
+                </div>
+                <div class="day-4">
+                  <div class="dayHeader" id="dayHeader4"></div>
+                  <div class="dayContent">
+                    <div class="dayTemperatureSymbol">
+                      <img src=""  id="day-4-symbol" class="nextDaySymbol">
+                    </div>
+                  <div class="footerMinMaxTemperature">
+                    <div class="dayMaxTemperature temp" id="forecastMaxTemperature4"></div>
+                    <div class="dayMinTemperature temp" id="forecastMinTemperature4"></div>
+                  </div>
+                  </div>
+                </div>
+                <div class="day-5">
+                  <div class="dayHeader" id="dayHeader5"></div>
+                  <div class="dayContent">
+                    <div class="dayTemperatureSymbol">
+                      <img src=""  id="day-5-symbol" class="nextDaySymbol">
+                    </div>
+                  <div class="footerMinMaxTemperature">
+                    <div class="dayMaxTemperature temp" id="forecastMaxTemperature5"></div>
+                    <div class="dayMinTemperature temp" id="forecastMinTemperature5"></div>
+                  </div>
+                  </div>
+                </div>
+              </div>     
+            </div>
+          </div>
+          <p class="footerText">"${dia}" será "${clima}" "${emoji}"</p>
+        </div>
+    
+    
+        <div class="wheatherRight container">
+          <div class="wheatherRightHeader">
+            <div class="user">Felipe emanuel barbo</div>
+            <div class="editCity">
+              <button type="button" id="editCity">
+                <img src="/img/iconlupa.png" alt="Ícone de lupa">
+              </button>
+            </div>
+            <div class="searchCity">
+              <input type="text" class="searchCity" id="searchCity" placeholder="Escolha um local...">
+            </div>
+          </div>
+          <div class="cityIdentificator"></div>
+          <div class="wheatherRightContent">
+            <div class="weatherSlider container">
+              <div class="wheatherSliderImg">
+                <img height="100%" width="100%" style="border-radius: 20px" src="/img/teste.jpg" alt="Conselheiro Pena, Minas Gerais">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+
+      <footer>
+        <script src="/bootstrap/js/biblioteca_jquery.js"></script>
+        <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+        <script type="module" src="/js/index.js"></script>
+      </footer>
+</body>
+</html>
