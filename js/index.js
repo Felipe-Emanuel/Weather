@@ -8,6 +8,7 @@ const forecast = document.querySelector('.forecastOfDays')
 const wheather = document.querySelector('.wheather')
 const wheatherRight = document.querySelector('.wheatherRight')
 const footerText = document.querySelector('.footerText')
+const realFeel = document.querySelector('.realFeel')
 
 // TOOLTIP FUNCTION
 // var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -84,6 +85,7 @@ function openWeater(){
     wheatherFooter.style.display = "block"
     wheatherSliderImg.style.display = "block"
     tempSymbol.style.display = "block"
+    realFeel.style.display = "flex"
 }
 
 function APIImport() {
@@ -101,47 +103,63 @@ var wheatherFooter = document.querySelector('.wheatherFooter')
 var wheatherSliderImg = document.querySelector('.wheatherSliderImg')
 
 btnEditCity.addEventListener("click", () => {
+    
+    
     searchCity.classList.add('hide')
-    openWeater()
-
+    
     if(searchCity.style.display === 'none') {
         searchCity.style.display = 'block';
-
+        
     } else {
         searchCity.style.display = 'none'
+        btnWeatherConfig.style.display = "block"
+        openWeater()
         APIImport()
+        if(btnWeatherConfigF.style.display === "block"){
+            btnWeatherConfigC.style.display = "none"
+        }} 
     }
-
-});
+);
 
 searchCity.addEventListener("keyup", (e) => {
     
     if (e.code === "Enter"){
         const search = e.target.value
+        btnWeatherConfig.style.display = "block"
         APIImport(search)
         openWeater()
-        };
-    }   
+        if(btnWeatherConfigF.style.display === "block"){
+            btnWeatherConfigC.style.display = "none"
+        }};
+    } 
 );
 
 // CELSIUS AND FAHRENHEIT
+
+const btnWeatherConfig = document.querySelector('.btnWeatherConfig')
 const btnWeatherConfigC = document.querySelector('.btnWeatherConfig.C')
 const btnWeatherConfigF = document.querySelector('.btnWeatherConfig.F')
 var temp = document.querySelectorAll('.temp')
-let tempSymbol = document.getElementById('tempSymbol')
+var tempSymbol = document.getElementById('tempSymbol')
+var mxTempSymbol = document.getElementById('mxTempSymbol')
+
+
 
 function fahrenheit () {
    temp.forEach(temp => {
-    temp.innerHTML = Math.floor(temp.innerHTML * 1.8) + 32
+    temp.innerHTML = Math.round(temp.innerHTML * 1.8) + 32
    });
-   tempSymbol.textContent = `°f`
+   tempSymbol.innerHTML = `°f`
+   realFeelSymbol.innerHTML = `°f`
+   mxTempSymbol.innerHTML = `°f`
 }
-
 function celsius () {
     temp.forEach(temp => {
-    temp.innerHTML = Math.floor((temp.innerHTML -32) / 1.8)
+    temp.innerHTML = Math.round((temp.innerHTML -32) / 1.8)
     });
-    tempSymbol.textContent = `°c`
+    tempSymbol.innerHTML = `°c`
+    realFeelSymbol.innerHTML = `°c`
+    mxTempSymbol.innerHTML = `°c`
 }
 
 function celsiusToFahrenheit(btn) {

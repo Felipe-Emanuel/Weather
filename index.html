@@ -26,17 +26,29 @@
               <div class="mainWeatherSymbol">
                 <img class="mainSymbol" src="">
               </div>
-              <div class="tempScreen">
-                  <div class="mainWeatherTemperature temp"></div>
-                  <div class="mainWeatherTemperature" id="tempSymbol">°c</div>
+              <div class="mainTempScreen">
+                <div class="mainWeatherTemperature temp"></div>
+                <div class="mainWeatherTemperature" id="tempSymbol"></div>
               </div>
-              <div class="mainWeatherClimate"></div>
-              <span class="emoji">😎</span>
+
+              <div class="climate">
+                <div class="mainWeatherClimate"></div>
+                <span class="emoji">😎</span>
+              </div>
+              <div class="wind"></div>
             </div>
-            <div class="feelsLike"></div>
+            <div class="realFeel">
+              <div class="feelsLike text"></div>
+              <div class="FeelsTemp temp"></div>
+              <div id="realFeelSymbol"></div>
+            </div>
             <div class="mainWeatherFooter">
-              <div class="mainWeatherMaxTemperature"></div>
-              <div class="mainWeatherToDoTip">Dica do que fazer neste clima</div>
+              <div class="mxTemp">
+                <div class="mxTempAbout"></div>
+                <div class="mainWeatherMaxTemperature temp"></div>
+                <div id="mxTempSymbol"></div>
+              </div>
+              <div class="mainWeatherToDoTip"></div>
             </div>
             <div class="showAndHideSliderBtn">
               <button type="button" id="hideSliderWeather">←</button>
@@ -81,7 +93,6 @@
               </div>
               <div class="tomorrowFooter">
                 <div class="tomorrowBePreaper">Preparese para o: "${clima}"</div>
-                <div class="tomorrowBePreaperSymbol">👀</div>
               </div>
             </div>
           </div>
