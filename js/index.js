@@ -10,12 +10,10 @@ const wheatherRight = document.querySelector('.wheatherRight')
 const footerText = document.querySelector('.footerText')
 const realFeel = document.querySelector('.realFeel')
 
-// TOOLTIP FUNCTION
-// var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-// var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-//   return new bootstrap.Tooltip(tooltipTriggerEl)
-// });
-
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
 
 // THIS WILL WORK WITH BUTTONS SIDE BY "PREVISÃO DE 5 DIAS"
 btnHideForecast.addEventListener("click", () => {
@@ -38,7 +36,6 @@ btnShowForecast.addEventListener("click", () => {
     btnHideForecast.style.display = "inline-block"
     btnShowForecast.style.display = "none"
     forecast.style.display = "block"
-    footerText.style.display = "block"
     forecast.animate ([
         {transform: 'scale(0)'},
         {transform: 'scale(.2)'},
@@ -185,3 +182,27 @@ btnWeatherConfigF.addEventListener("click", () => {
     celsius()
     }
 )
+
+// AVERAGE
+
+var tomorrowBePreaper = document.querySelector('.tomorrowBePreaper')
+var tomorrow = document.querySelector('.tomorrow')
+tomorrow.addEventListener("mouseover", (e) => {
+    if (e.target === tomorrow) {
+        tomorrowBePreaper.style.visibility = "hidden"
+    } else tomorrowBePreaper.style.visibility = "visible"
+    weatherApi.avarage();
+
+})
+
+
+
+
+// document.querySelectorAll('.img').forEach((img) => 
+//     img.addEventListener('mouseover', (e) => {
+//         if(e.target){
+//             footerText.style.visibility = "visible"
+//             e.target.parentNode.weatherApi.avarageFooterClimate();
+//         }
+//     }
+// ))

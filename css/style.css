@@ -293,9 +293,18 @@ body {
     align-items: center;
 }
 
-.tomorrowBePreaper {
-    font-size: 15px;
-    text-align: center;
+.average {
+    visibility: hidden;
+    background-color: transparent;
+    color: #FFF;
+    padding: 0 5px;
+    border-radius: 25%;
+    border: 1px solid transparent;
+}
+
+.average:hover {
+    transition: .5s;
+    animation: ForecastBtn .5s 1; 
 }
 
 /* FORECAST OF DAYS */
@@ -510,5 +519,5 @@ body {
 
 .footerText {
     text-align: center;
-    display: none;
+    visibility: hidden;
 }

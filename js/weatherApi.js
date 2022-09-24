@@ -283,52 +283,96 @@ try {
             forecastMinTemperature4.innerHTML = `${CityName.data.weather[5].mintempC}`
             forecastMaxTemperature5.innerHTML = `${CityName.data.weather[6].maxtempC}`
             forecastMinTemperature5.innerHTML = `${CityName.data.weather[6].mintempC}`
-        }
-        // AVERAGE TOMORROW'S DAY
-        var avarageC = CityName.data.weather[1].avgtempC
-        var avarageF = CityName.data.weather[1].avgtempF
-        var congelanteC = 0
-        var congelanteF = 32
-        var friaC = 10
-        var friaF = 50
-        var frescoC = 20
-        var frescoF = 68
-        var quenteC = 30
-        var quenteF = 86
 
-
-        
-        if (avarageC <= 5) {
-
-                tomorrowBePreaper.innerHTML = `Media congelante 🥶`
-
-            }
-            else if (avarageC <= 20) {
-                tomorrowBePreaper.innerHTML = `Media muito ou ligeiramente fresca ☁`
-
-            }
-
-        if (avarageC  >= 21){
-
-            tomorrowBePreaper.innerHTML = `Media muito fria 🏔`
-
-
-        }
-        else if (avarageC >= 30) {
-
-                tomorrowBePreaper.innerHTML = `Media poissivelmente ou muito quente 🥵`
-                
-            }
-
-            console.log(CityName.data)
-        } catch (err) {
+        }} catch (err) {
         console.log(`Erro: ${err}`)
     }
+}
+
+// function teste() {
+//     weatherAPIData()
+
+// }
+
+    // AVERAGE
+
+function avarage() {
+    var tomorrowBePreaper = document.querySelector('.tomorrowBePreaper')
+
+    function weatherAPIData (search) {
+        var search = document.getElementById('searchCity').value
+        return fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=a7200142d2ee4452ae7192822221309&q=${search}&State&format=json&lang=pt
+        &showlocaltime=yes&showmap=yes&includelocation=yes&offset=negative`)
+    
+        .then((data) => data.json())
+        .catch((err) => console.log(err))
+    }
+
+    async function weatherAPI(search) {
+        try {   
+            const CityName = await weatherAPIData(search) 
+            if (btnWeatherConfigF.style.display === "block") {
+
+                tomorrowBePreaper.innerHTML = `média de amanhã: ${CityName.data.weather[1].avgtempF} °f` 
+                
+            } else {
+
+                tomorrowBePreaper.innerHTML = `média de amanhã: ${CityName.data.weather[1].avgtempC} °c` 
+
+            }} catch (err) {
+                console.log(`Erro: ${err}`)
+            }
+    }
+    weatherAPI()  
+}
+
+function avarageFooterClimate() {
+    function weatherAPIData (search) {
+        var search = document.getElementById('searchCity').value
+        return fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=a7200142d2ee4452ae7192822221309&q=${search}&State&format=json&lang=pt
+        &showlocaltime=yes&showmap=yes&includelocation=yes&offset=negative`)
+    
+        .then((data) => data.json())
+        .catch((err) => console.log(err))
+    }
+
+    async function weatherAPI(search) {
+        try {   
+            const CityName = await weatherAPIData(search) 
+        var footerText = document.querySelector('.footerText')
+        var avarageC = CityName.data.weather[1].avgtempC
+        var avarageF = CityName.data.weather[1].avgtempF
+    
+        if (avarageC <= 5 || avarageF <= 41) {
+
+            footerText.innerHTML = `Media congelante 🥶`
+
+        } else if (avarageC <= 18 || avarageF <= 65) {
+                    
+            footerText.innerHTML = `Media muito fria 🏔`
+
+        } else if (avarageC  <= 29 || avarageF <= 84) {
+
+            footerText.innerHTML = `Media ligeiramente fresca ou clima abafado ☁`
+
+        } else if (avarageC >= 30 || avarageF >= 86) {
+
+            footerText.innerHTML = `Media quente ou muito quente 🥵`
+        }
+            console.log(CityName.data)
+
+            } catch (err) {
+                console.log(`Erro: ${err}`)
+            }
+        }
+        weatherAPI()  
 }
 
 export default {
     openWeatherAPI: openWeatherAPI,
     showWeatherData: showWeatherData,
     weatherAPIData: weatherAPIData,
-    weatherAPI: weatherAPI
-};
+    weatherAPI: weatherAPI,
+    avarage: avarage,
+    avarageFooterClimate: avarageFooterClimate
+}
