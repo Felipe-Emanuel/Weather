@@ -251,6 +251,10 @@ body {
     margin-top: 5%;
 }
 
+.todayDay:hover, .tomorrowDay:hover, .dayHeader:hover{
+    font-weight: bold;
+}
+
 #todaySymbol, #tomorrowSymbol {
     border-radius: 100%;
     margin-top: 7px;
@@ -459,11 +463,6 @@ body {
     text-align: start;
 }
 
-.user {
-    text-align: center;
-    width: 35%;    
-}
-
 #editCity {
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
@@ -520,4 +519,12 @@ body {
 .footerText {
     text-align: center;
     visibility: hidden;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0;
+
+}
+
+.avarage-1, .avarage-2, .avarage-3, .avarage-4, .avarage-5 {
+    display: none;
 }

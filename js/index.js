@@ -10,17 +10,10 @@ const wheatherRight = document.querySelector('.wheatherRight')
 const footerText = document.querySelector('.footerText')
 const realFeel = document.querySelector('.realFeel')
 
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl)
-})
-
 // THIS WILL WORK WITH BUTTONS SIDE BY "PREVISÃO DE 5 DIAS"
 btnHideForecast.addEventListener("click", () => {
     btnShowForecast.style.display = "inline-block"
     btnHideForecast.style.display = "none"
-    footerText.style.display = "none"
-
     forecast.animate ([
         {transform: 'scale(.8)'},
         {transform: 'scale(.5)'},
@@ -33,8 +26,8 @@ btnHideForecast.addEventListener("click", () => {
 });
 
 btnShowForecast.addEventListener("click", () => {
-    btnHideForecast.style.display = "inline-block"
     btnShowForecast.style.display = "none"
+    btnHideForecast.style.display = "inline-block"
     forecast.style.display = "block"
     forecast.animate ([
         {transform: 'scale(0)'},
@@ -56,9 +49,8 @@ mainWeatherTop.addEventListener("mouseout", () => {
 });
 
 // WORKING WITH SIDE BUTTON TO SHOW OR HIDE WEATHER RIGHTS SIDE
-
 btnShowSliderWeather.addEventListener("click", () => {
-    btnShowSliderWeather.style.display ="none"
+    btnShowSliderWeather.style.display = "none"
     btnHideSliderWeather.style.display = "block"
     wheatherRight.style.display = "block"
     wheather.style.width = '55%'  
@@ -75,10 +67,14 @@ btnHideSliderWeather.addEventListener("click", () => {
 
 
 // SEARCH CITY
+const btnEditCity = document.querySelector('#editCity')
+const searchCity = document.querySelector('.searchCity')
+var wheatherMiddle = document.querySelector('.wheatherMiddle')
+var wheatherFooter = document.querySelector('.wheatherFooter')
+var wheatherSliderImg = document.querySelector('.wheatherSliderImg')
+
 function openWeater(){
     wheatherMiddle.style.display = "flex"
-    btnHideForecast.style.display = "inline-block"
-    btnHideForecast.style.display = "none"
     wheatherFooter.style.display = "block"
     wheatherSliderImg.style.display = "block"
     tempSymbol.style.display = "block"
@@ -91,40 +87,31 @@ function APIImport() {
     weatherApi.weatherAPI()
 }
 
-
-const btnEditCity = document.querySelector('#editCity')
-const searchCity = document.querySelector('.searchCity')
-
-var wheatherMiddle = document.querySelector('.wheatherMiddle')
-var wheatherFooter = document.querySelector('.wheatherFooter')
-var wheatherSliderImg = document.querySelector('.wheatherSliderImg')
-
 btnEditCity.addEventListener("click", () => {
-    
-    
-    searchCity.classList.add('hide')
-    
+        
     if(searchCity.style.display === 'none') {
         searchCity.style.display = 'block';
         
-    } else {
-        searchCity.style.display = 'none'
-        btnWeatherConfig.style.display = "block"
-        openWeater()
-        APIImport()
+        } else {
+            searchCity.style.display = 'none'
+            btnWeatherConfig.style.display = "block"
+            openWeater()
+            APIImport()
+    
         if(btnWeatherConfigF.style.display === "block"){
             btnWeatherConfigC.style.display = "none"
-        }} 
-    }
+        }
+    }}
 );
 
 searchCity.addEventListener("keyup", (e) => {
-    
+
     if (e.code === "Enter"){
         const search = e.target.value
         btnWeatherConfig.style.display = "block"
         APIImport(search)
         openWeater()
+
         if(btnWeatherConfigF.style.display === "block"){
             btnWeatherConfigC.style.display = "none"
         }};
@@ -132,15 +119,12 @@ searchCity.addEventListener("keyup", (e) => {
 );
 
 // CELSIUS AND FAHRENHEIT
-
 const btnWeatherConfig = document.querySelector('.btnWeatherConfig')
 const btnWeatherConfigC = document.querySelector('.btnWeatherConfig.C')
 const btnWeatherConfigF = document.querySelector('.btnWeatherConfig.F')
 var temp = document.querySelectorAll('.temp')
 var tempSymbol = document.getElementById('tempSymbol')
 var mxTempSymbol = document.getElementById('mxTempSymbol')
-
-
 
 function fahrenheit () {
    temp.forEach(temp => {
@@ -183,8 +167,7 @@ btnWeatherConfigF.addEventListener("click", () => {
     }
 )
 
-// AVERAGE
-
+// AVERAGE CLIMATE
 var tomorrowBePreaper = document.querySelector('.tomorrowBePreaper')
 var tomorrow = document.querySelector('.tomorrow')
 tomorrow.addEventListener("mouseover", (e) => {
@@ -195,14 +178,12 @@ tomorrow.addEventListener("mouseover", (e) => {
 
 })
 
+weatherApi.avarageFooterClimate()
 
-
-
-// document.querySelectorAll('.img').forEach((img) => 
-//     img.addEventListener('mouseover', (e) => {
-//         if(e.target){
-//             footerText.style.visibility = "visible"
-//             e.target.parentNode.weatherApi.avarageFooterClimate();
-//         }
-//     }
-// ))
+document.querySelectorAll('.img').forEach((img) => 
+    img.addEventListener('mouseout', (e) => {
+        if(e.target){
+            footerText.style.visibility = "hidden"
+        }
+    }
+))

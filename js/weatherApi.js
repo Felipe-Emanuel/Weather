@@ -12,13 +12,14 @@ var btnEditCity = document.getElementById('editCity')
 var wind = document.querySelector('.wind')
 
 
-
+// THIS WILL CHANGE ALL SITE BACKGROUND COLORS TO BE COMPATIBLE WITH THE CLIMATE IMAGE
 function changeBG(color) {
     wheather.style.backgroundColor = color
     showAndHideSliderBtn.style.backgroundColor = color
     btnEditCity.style.backgroundColor = color
 }
 
+// HERE IS THE FIRST API, THAT WILL SEARCH FOR CITY, NAME, COUNTRY AND ALL CURRENTLY TEMPERATURE
 const openWeatherAPI = async (city) => {
     var city = document.getElementById('searchCity').value
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${openWeatherKey}&lang=pt_br&units=metric`;
@@ -33,6 +34,7 @@ const showWeatherData = async (city) => {
     var climate = `${data.weather[0].description}`
     var climateIcon = `${data.weather[0].icon}`
     var tip = document.querySelector('.mainWeatherToDoTip')
+    var date = document.querySelector('.date')
 
     // PROMISES
     const climatePromise = new Promise ((resolve) => {
@@ -50,6 +52,7 @@ const showWeatherData = async (city) => {
         climateIconPromise
         .catch(err => console.log(`climateIcon error: ${err}`))
     
+    // THIS TRY WILL WORK WITH BACKGROUND COLORS, BACKGROUNG IMAGE AND TIPS TO EACH POSSIBLE CLIMATE
     try {
         mainSymbol.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`
         cityIdentificator.innerHTML = `${data.name}, ${data.sys.country}`
@@ -57,13 +60,20 @@ const showWeatherData = async (city) => {
         mainWeatherClimate.innerHTML = `${data.weather[0].description}`
         wind.innerHTML = `${data.wind.speed}Km/h`
 
+        // THIS WILL WORK WITH CAPITALIZE THE CLIMATE STRING
+            var climateSlice = climate.slice(1)
+            var climateCharAt = climate.charAt(0)
+            var climateCharAtToUp = climateCharAt.toUpperCase()
+            var climateCapitalized =  climateCharAtToUp + climateSlice
+            mainWeatherClimate.textContent = climateCapitalized
+
         if(climate === "encoberto"
             || climate === "nublado"){
  
                 mainWeatherTop.style.backgroundImage = "url('../img/Cloudy1.png')"
                 changeBG("#12324d")
                 document.body.style.backgroundColor ="#183857"
-                tip.innerHTML = `Clima bom para um café e passeios a pé`
+                tip.innerHTML = `Clima bom para um café e passeios a pé ou cobertor e chocolate quente`
 
             } else if (climate === "algumas nuvens") {
  
@@ -90,7 +100,17 @@ const showWeatherData = async (city) => {
                 document.body.style.backgroundColor ="#12233b"
                 tip.innerHTML = `Noite perfeita para olhar o passado no céu`
 
-            } else if (climate === "nuvens dispersas" 
+            }
+            
+        if (climate === "nuvens dispersas" && climateIcon === "03d") {
+ 
+                mainWeatherTop.style.backgroundImage = "url('../img/clearDay.png')"
+                changeBG("#215c98")
+                document.body.style.backgroundColor ="#265f99"
+                tip.innerHTML = `Ótimo clima para estudar e focar`
+        }
+            
+            else if (climate === "nuvens dispersas" 
             || climate === "céu limpo" && climateIcon === "01d") {
 
                 mainWeatherTop.style.backgroundImage = "url('../img/Sunny.png')"
@@ -168,8 +188,7 @@ const showWeatherData = async (city) => {
     }
 }
 
-
-
+// 2ND API AND WILL WORK WITH WEATHER AND FORECAST DAYS (ALL ABOUT TOMORROW AND 5 DAYS LATER ITS HERE)
 function weatherAPIData (search) {
     var search = document.getElementById('searchCity').value
     return fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=a7200142d2ee4452ae7192822221309&q=${search}&State&format=json&lang=pt
@@ -179,7 +198,7 @@ function weatherAPIData (search) {
     .catch((err) => console.log(err))
 }
 
-
+// ALL THAT NEEDED VARIABLES TO BE CHANGED WHEN A CITY IS SEARCHED. hERE IS REALLY SO MUCH, BUT BASICALLY ALL DOM
 async function weatherAPI(search) {
     var mainWeatherTemperature = document.querySelector('.mainWeatherTemperature')
     var feelsLike = document.querySelector('.feelsLike')
@@ -217,8 +236,13 @@ async function weatherAPI(search) {
     var mxTempSymbol = document.getElementById('mxTempSymbol')
     var FeelsTemp = document.querySelector('.FeelsTemp.temp')
     var mxTempAbout = document.querySelector('.mxTempAbout')
-    var tomorrowBePreaper = document.querySelector('.tomorrowBePreaper')
+    var avarage1 = document.querySelector('.avarage-1')
+    var avarage2 = document.querySelector('.avarage-2')
+    var avarage3 = document.querySelector('.avarage-3')
+    var avarage4 = document.querySelector('.avarage-4')
+    var avarage5 = document.querySelector('.avarage-5')
 
+// THIS ATTEMPT WORKS WITH CHANGES AND ATTEMPTS TO DEAL WITH CELSIUS AND FAHRENHEIT
 try {   
     const CityName = await weatherAPIData(search)
 
@@ -238,7 +262,7 @@ try {
         nextDaySymbo5.src = `${CityName.data.weather[5].hourly[0].weatherIconUrl[0].value}`
 
         if (btnWeatherConfigF.style.display === "block") {
-                mainWeatherTemperature.innerHTML = `${CityName.data.current_condition[0].FeelsLikeF}`
+                mainWeatherTemperature.innerHTML = `${CityName.data.current_condition[0].temp_F}`
                 tempSymbol.innerHTML = `°f`
                 feelsLike.innerHTML = `Sensação real de:`
                 FeelsTemp.innerHTML = ` ${CityName.data.current_condition[0].FeelsLikeF}`
@@ -260,6 +284,13 @@ try {
                 forecastMinTemperature4.innerHTML = `${CityName.data.weather[5].mintempF}`
                 forecastMaxTemperature5.innerHTML = `${CityName.data.weather[6].maxtempF}`
                 forecastMinTemperature5.innerHTML = `${CityName.data.weather[6].mintempF}`
+                avarage1.innerHTML = `${CityName.data.weather[2].avgtempF}`
+                avarage2.innerHTML = `${CityName.data.weather[3].avgtempF}`
+                avarage3.innerHTML = `${CityName.data.weather[4].avgtempF}`
+                avarage4.innerHTML = `${CityName.data.weather[5].avgtempF}`
+                avarage5.innerHTML = `${CityName.data.weather[6].avgtempF}`
+                
+
         } else {
             mainWeatherTemperature.innerHTML = `${CityName.data.current_condition[0].temp_C}`
             tempSymbol.innerHTML = `°c`
@@ -283,19 +314,21 @@ try {
             forecastMinTemperature4.innerHTML = `${CityName.data.weather[5].mintempC}`
             forecastMaxTemperature5.innerHTML = `${CityName.data.weather[6].maxtempC}`
             forecastMinTemperature5.innerHTML = `${CityName.data.weather[6].mintempC}`
+            avarage1.innerHTML = `${CityName.data.weather[2].avgtempC}`
+            avarage2.innerHTML = `${CityName.data.weather[3].avgtempC}`
+            avarage3.innerHTML = `${CityName.data.weather[4].avgtempC}`
+            avarage4.innerHTML = `${CityName.data.weather[5].avgtempC}`
+            avarage5.innerHTML = `${CityName.data.weather[6].avgtempC}`
 
+
+            console.log(CityName)
         }} catch (err) {
         console.log(`Erro: ${err}`)
     }
 }
 
-// function teste() {
-//     weatherAPIData()
-
-// }
-
-    // AVERAGE
-
+// ALL ABOUT AVERAGE CLIMATE AND YOUR VARIABLES
+// 2ND API RECEIVE OTHER CALL HERE CAUSE THE WEATHER  IT'S NECESSARY AGAIN AND CAN'T DO IT JUST USING A FUNCTION... ALL FETCH HAS BE NECESSARY AGAIN
 function avarage() {
     var tomorrowBePreaper = document.querySelector('.tomorrowBePreaper')
 
@@ -326,47 +359,72 @@ function avarage() {
     weatherAPI()  
 }
 
+// THIS WILL WORKS WITH THE FOOTER TEXT WHEN THE CLIMATE ICONS RECIVE A MOUSEOVER
+// LIKE ABOUT CLIMATE, 2ND API ITS NECESSARY A NEW FETCH AGAIN
 function avarageFooterClimate() {
-    function weatherAPIData (search) {
-        var search = document.getElementById('searchCity').value
-        return fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=a7200142d2ee4452ae7192822221309&q=${search}&State&format=json&lang=pt
-        &showlocaltime=yes&showmap=yes&includelocation=yes&offset=negative`)
-    
-        .then((data) => data.json())
-        .catch((err) => console.log(err))
-    }
+    var footerText = document.querySelector('.footerText')
 
-    async function weatherAPI(search) {
-        try {   
-            const CityName = await weatherAPIData(search) 
-        var footerText = document.querySelector('.footerText')
-        var avarageC = CityName.data.weather[1].avgtempC
-        var avarageF = CityName.data.weather[1].avgtempF
-    
-        if (avarageC <= 5 || avarageF <= 41) {
+    document.querySelectorAll('.img').forEach((img) => 
+        img.addEventListener('mouseover', (e) => {
+            if(e.target){
+                footerText.style.visibility = "visible"
+                e.target.parentNode;{
 
-            footerText.innerHTML = `Media congelante 🥶`
-
-        } else if (avarageC <= 18 || avarageF <= 65) {
-                    
-            footerText.innerHTML = `Media muito fria 🏔`
-
-        } else if (avarageC  <= 29 || avarageF <= 84) {
-
-            footerText.innerHTML = `Media ligeiramente fresca ou clima abafado ☁`
-
-        } else if (avarageC >= 30 || avarageF >= 86) {
-
-            footerText.innerHTML = `Media quente ou muito quente 🥵`
-        }
-            console.log(CityName.data)
-
-            } catch (err) {
-                console.log(`Erro: ${err}`)
+            function weatherAPIData (search) {
+                var search = document.getElementById('searchCity').value
+                return fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=a7200142d2ee4452ae7192822221309&q=${search}&State&format=json&lang=pt
+                &showlocaltime=yes&showmap=yes&includelocation=yes&offset=negative`)
+            
+                .then((data) => data.json())
+                .catch((err) => console.log(err))
             }
-        }
-        weatherAPI()  
-}
+            // FOOTER TEXT TRY FOR EVERY POSSIBLE CLIMATE ICON
+            async function weatherAPI(search) {
+                try {   
+                    const CityName = await weatherAPIData(search) 
+                var avarageC = CityName.data.weather[1].avgtempC
+                var avarageF = CityName.data.weather[1].avgtempF
+
+                var avarage1C = CityName.data.weather[2].avgtempC
+                var avarage2C = CityName.data.weather[3].avgtempC
+                var avarage3C = CityName.data.weather[4].avgtempC
+                var avarage4C = CityName.data.weather[5].avgtempC
+                var avarage5C = CityName.data.weather[6].avgtempC
+
+                var avarage1F = CityName.data.weather[2].avgtempF
+                var avarage2F = CityName.data.weather[3].avgtempF
+                var avarage3F = CityName.data.weather[4].avgtempF
+                var avarage4F = CityName.data.weather[5].avgtempF
+                var avarage5F = CityName.data.weather[6].avgtempF
+                
+                if (avarageC, avarage1C, avarage2C, avarage3C, avarage4C, avarage5C <= 5
+                    || avarageF, avarage1F, avarage2F, avarage3F, avarage4F, avarage5F <= 41) {
+        
+                    footerText.innerHTML = `Media congelante 🥶`
+        
+                } else if (avarageC, avarage1C, avarage2C, avarage3C, avarage4C, avarage5C <= 18
+                    || avarageF, avarage1F, avarage2F, avarage3F, avarage4F, avarage5F <= 65) {
+                            
+                    footerText.innerHTML = `Media muito fria 🏔`
+        
+                } else if (avarageC, avarage1C, avarage2C, avarage3C, avarage4C, avarage5C <= 29
+                    || avarageF, avarage1F, avarage2F, avarage3F, avarage4F, avarage5F <= 84) {
+        
+                    footerText.innerHTML = `Media ligeiramente fresca ou clima abafado ☁`
+        
+                } else if (avarageC, avarage1C, avarage2C, avarage3C, avarage4C, avarage5C >= 30
+                    || avarageF, avarage1F, avarage2F, avarage3F, avarage4F, avarage5F >= 86) {
+        
+                    footerText.innerHTML = `Media quente ou muito quente 🥵`
+                }        
+                    } catch (err) {
+                        console.log(`Erro: ${err}`)
+                    }
+                }
+            weatherAPI() 
+        };
+    }}
+))}
 
 export default {
     openWeatherAPI: openWeatherAPI,
@@ -374,5 +432,5 @@ export default {
     weatherAPIData: weatherAPIData,
     weatherAPI: weatherAPI,
     avarage: avarage,
-    avarageFooterClimate: avarageFooterClimate
+    avarageFooterClimate:avarageFooterClimate
 }
