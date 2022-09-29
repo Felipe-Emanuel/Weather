@@ -31,6 +31,7 @@ body {
 }
 
 .wheatherRight {
+    transition: .5s;
     display: none;
     width: 50%;
     height: 100%;
@@ -93,7 +94,7 @@ body {
 
 .btnWeatherConfig:hover{
     transition: .5s;
-    animation: btnWeatherConfig .4s linear;  
+    animation: btnWeatherConfig .4s linear;
 }
 
 .F {
@@ -433,11 +434,11 @@ body {
     
 }
 
-#hideSliderWeather {
+#hideSliderWeather, .btnHideTip {
     display: none;
 }
 
-#hideSliderWeather, #showSliderWeather {
+#hideSliderWeather, #showSliderWeather, .btnHideTip {
     background: transparent;
     color: #FFF;
     width: 25px;
@@ -448,7 +449,7 @@ body {
     border: 1px solid transparent;
 }
 
-#hideSliderWeather:hover, #showSliderWeather:hover {
+#hideSliderWeather:hover, #showSliderWeather:hover, .btnHideTip:hover {
     transition: .5s;
     animation: ForecastBtn .5s;
     cursor: default;
@@ -493,11 +494,6 @@ body {
     color: #fff;
 }
 
-.cityIdentificator {
-    text-align: center;
-    width: 100%;
-}
-
 .wheatherRightContent {
     width: 100%;
     height: 70%;
@@ -512,6 +508,7 @@ body {
 }
 
 .wheatherSliderImg {
+    text-align: center;
     display: none;
     height: 100%;
 }
@@ -527,4 +524,51 @@ body {
 
 .avarage-1, .avarage-2, .avarage-3, .avarage-4, .avarage-5 {
     display: none;
+}
+
+#imgSlide {
+    background-color: #FFF;
+}
+
+.contribute, .btnShowTip {
+    background-color: transparent;
+    padding: 2px 5px;
+    color: #EEE;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid transparent;
+}
+
+.contribute:hover {
+    transition: .5s;
+    animation: btnWeatherConfig .4s linear;
+}
+
+
+.cityAndFlagIdentify {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+#cityFlagIdentificator {
+    display: flex;
+    width: 30px
+}
+
+.ShowTip {
+    font-size: 12px;
+}
+
+.tip {
+    display: none;
+    font-size: 12px;
+}
+
+.tipAndBtn {
+    display: flex;
+}
+
+.carousel-inner {
+    border-radius: 20px;
 }

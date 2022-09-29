@@ -193,21 +193,28 @@
               <input type="text" class="searchCity" id="searchCity" placeholder="Escolha um local...">
             </div>
           </div>
-          <div class="cityIdentificator"></div>
+          <div class="ShowTip">
+            <button type="button" class="btnShowTip">Dica</button>
+            <div class="tipAndBtn">
+              <p class="tip">Tente pesquisar sem maiúsculas ou caractéres especiais</p>
+              <button type="button" class="btnHideTip">←</button>
+            </div>
+          </div>
+          <div class="cityAndFlagIdentify">
+            <div class="cityIdentificator"></div>
+            <img id="cityFlagIdentificator">
+          </div>
           <div class="wheatherRightContent">
             <div class="weatherSlider container">
-              <div class="wheatherSliderImg">
-                <img height="100%" width="100%" style="border-radius: 20px" src="/img/teste.jpg" alt="Conselheiro Pena, Minas Gerais">
-              </div>
+              <div class="wheatherSliderImg"></div>
             </div>
           </div>
         </div>
       </div> 
 
-
       <footer>
         <script src="/bootstrap/js/biblioteca_jquery.js"></script>
-        <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script type="module" src="/js/index.js"></script>
       </footer>
 </body>

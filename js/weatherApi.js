@@ -11,7 +11,6 @@ var wheather = document.querySelector('.wheather')
 var btnEditCity = document.getElementById('editCity')
 var wind = document.querySelector('.wind')
 
-
 // THIS WILL CHANGE ALL SITE BACKGROUND COLORS TO BE COMPATIBLE WITH THE CLIMATE IMAGE
 function changeBG(color) {
     wheather.style.backgroundColor = color
@@ -25,7 +24,6 @@ const openWeatherAPI = async (city) => {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${openWeatherKey}&lang=pt_br&units=metric`;
     const res = await fetch(apiURL)
     const data = await res.json()
-    console.log(data)
     return data;
 }
 
@@ -34,7 +32,6 @@ const showWeatherData = async (city) => {
     var climate = `${data.weather[0].description}`
     var climateIcon = `${data.weather[0].icon}`
     var tip = document.querySelector('.mainWeatherToDoTip')
-    var date = document.querySelector('.date')
 
     // PROMISES
     const climatePromise = new Promise ((resolve) => {
@@ -55,7 +52,7 @@ const showWeatherData = async (city) => {
     // THIS TRY WILL WORK WITH BACKGROUND COLORS, BACKGROUNG IMAGE AND TIPS TO EACH POSSIBLE CLIMATE
     try {
         mainSymbol.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`
-        cityIdentificator.innerHTML = `${data.name}, ${data.sys.country}`
+        cityIdentificator.innerHTML = `${data.name}`
         mainWeatherCity.innerHTML = `${data.name}, ${data.sys.country}`
         mainWeatherClimate.innerHTML = `${data.weather[0].description}`
         wind.innerHTML = `${data.wind.speed}Km/h`
@@ -65,7 +62,9 @@ const showWeatherData = async (city) => {
             var climateCharAt = climate.charAt(0)
             var climateCharAtToUp = climateCharAt.toUpperCase()
             var climateCapitalized =  climateCharAtToUp + climateSlice
+            var cityFlagIdentificator = document.getElementById('cityFlagIdentificator')
             mainWeatherClimate.textContent = climateCapitalized
+            cityFlagIdentificator.src = `https://countryflagsapi.com/png/${data.sys.country}`
 
         if(climate === "encoberto"
             || climate === "nublado"){
@@ -320,8 +319,6 @@ try {
             avarage4.innerHTML = `${CityName.data.weather[5].avgtempC}`
             avarage5.innerHTML = `${CityName.data.weather[6].avgtempC}`
 
-
-            console.log(CityName)
         }} catch (err) {
         console.log(`Erro: ${err}`)
     }
@@ -426,11 +423,66 @@ function avarageFooterClimate() {
     }}
 ))}
 
+// THIS API WILL SEARCH FOR IMAGES ABOUT THE CITY
+const imgFound = async (img) => {
+    var img = document.getElementById('searchCity').value
+    const apiURL = `https://api.unsplash.com/search/photos?&query=${img}&client_id=GAtlL48GSkI5YOnY_bKr3PyWZPR5pEeMubCw5cTr1t8&lang=pt`
+    const res = await fetch(apiURL)
+    const data = await res.json()
+    return data;
+}
+
+const addImgFound = async (img) => {
+    const data = await imgFound(img)
+    var wheatherSliderImg = document.querySelector('.wheatherSliderImg')
+    var cityFlagIdentificator = document.getElementById('cityFlagIdentificator')
+    cityFlagIdentificator.style.display = "flex"
+
+    try{
+        wheatherSliderImg.innerHTML =
+        `<div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators" >
+          <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src=${data.results[3].urls.small} class="d-block w-100" alt=${data.results[3].alt_description} height="250px" width="250px" style="border-radius: 20px">
+          </div>
+          <div class="carousel-item">
+            <img src=${data.results[7].urls.small} class="d-block w-100" alt=${data.results[7].alt_description} height="250px" width="250px" style="border-radius: 20px">
+          </div>
+          <div class="carousel-item">
+            <img src=${data.results[5].urls.small} class="d-block w-100" alt=${data.results[5].alt_description} height="250px" width="250px" style="border-radius: 20px">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>`
+
+    } catch (err) {
+        wheatherSliderImg.innerHTML = `<img height="100%" width="100%" style="border-radius: 20px" src="./img/error404.png" alt="Imagem não encontrada" id="imgSlide">
+                                       <p>Lamentamos, mas ainda não possuímos uma imagem deste local. Você poderia contribuir clicando logo abaixo 👀</p>
+                                       <button type="button" class="contribute">Contribuir</button>`
+        console.log(`Imagem Api Error: ${err}`)
+    }
+}
+
+
 export default {
     openWeatherAPI: openWeatherAPI,
     showWeatherData: showWeatherData,
     weatherAPIData: weatherAPIData,
     weatherAPI: weatherAPI,
     avarage: avarage,
-    avarageFooterClimate:avarageFooterClimate
+    avarageFooterClimate:avarageFooterClimate,
+    addImgFound: addImgFound
+
 }

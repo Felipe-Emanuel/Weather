@@ -55,14 +55,32 @@ btnShowSliderWeather.addEventListener("click", () => {
     wheatherRight.style.display = "block"
     wheather.style.width = '55%'  
     mainWeatherTop.style.borderRadius = '15px 0px 15px 0px' 
+    // SHOW RIGHT SIDE ANIMATION
+    wheatherRight.animate ([
+        {transform: 'scale(.0)'},
+        {transform: 'scale(.2)'},
+        {transform: 'scale(.5)'},
+        {transform: 'scale(.8)'}
+    ], {duration: 500})
+
 })
 
 btnHideSliderWeather.addEventListener("click", () => {
-    btnHideSliderWeather.style.display = "none"
+    // HIDE RIGHT SIDE ANIMATION
+    wheatherRight.animate ([
+     {transform: 'scale(.8)'},
+     {transform: 'scale(.5)'},
+     {transform: 'scale(.2)'},
+     {transform: 'scale(0)'}
+ ], {duration: 500})
+ setTimeout(() => {
+     btnHideSliderWeather.style.display = "none"
     btnShowSliderWeather.style.display = "block"
     wheatherRight.style.display = "none"
     wheather.style.width = '40%'  
     mainWeatherTop.style.borderRadius = '15px 15px 0px 0px' 
+}, 500)
+   
 });
 
 
@@ -85,6 +103,8 @@ function APIImport() {
     weatherApi.showWeatherData()
     weatherApi.weatherAPIData()
     weatherApi.weatherAPI()
+    weatherApi.addImgFound()
+
 }
 
 btnEditCity.addEventListener("click", () => {
@@ -187,3 +207,23 @@ document.querySelectorAll('.img').forEach((img) =>
         }
     }
 ))
+
+// "DICA" BUTTON
+var btnShowTip = document.querySelector('.btnShowTip')
+var btnHideTip = document.querySelector('.btnHideTip')
+var tip = document.querySelector('.tip')
+
+
+btnShowTip.addEventListener("click", () => {
+        tip.style.display = "block" 
+        btnHideTip.style.display = "flex"
+        btnShowTip.style.display = "none"
+
+})
+
+btnHideTip.addEventListener("click", () => {
+        tip.style.display = "none"
+        btnHideTip.style.display = "none"
+        btnShowTip.style.display = "block"
+    
+})
