@@ -142,7 +142,7 @@ const showWeatherData = async (city) => {
                 tip.innerHTML = `Cuidado com os possíveis raios!`
 
             } else if (climate === "chuva leve"
-            || climate === "Aguaceiros fracos"
+            || climate === "garoa de leve intensidade"
             || climate === "chuvas") {
  
                 mainWeatherTop.style.backgroundImage= "url('../img/Rain2.png')"
@@ -183,7 +183,6 @@ const showWeatherData = async (city) => {
                 tip.innerHTML = `Que tal um boneco de neve?`
             };
         } catch (err) {
-        console.log(`Erro: ${err}`)
     }
 }
 
@@ -244,7 +243,7 @@ async function weatherAPI(search) {
 // THIS ATTEMPT WORKS WITH CHANGES AND ATTEMPTS TO DEAL WITH CELSIUS AND FAHRENHEIT
 try {   
     const CityName = await weatherAPIData(search)
-
+    
         date.innerHTML = `${CityName.data.time_zone[0].localtime.slice(11)}`
         todayMoisturePercent.innerHTML = `${CityName.data.current_condition[0].humidity}%`
         todaySymbol.src = `${CityName.data.weather[0].hourly[0].weatherIconUrl[0].value}`
@@ -320,7 +319,26 @@ try {
             avarage5.innerHTML = `${CityName.data.weather[6].avgtempC}`
 
         }} catch (err) {
-        console.log(`Erro: ${err}`)
+            var error = document.querySelector('.error')
+            var wheatherMiddle = document.querySelector('.wheatherMiddle')
+            var wheatherFooter = document.querySelector('.wheatherFooter')
+            var wheatherSliderImg = document.querySelector('.wheatherSliderImg')
+            var realFeel = document.querySelector('.realFeel')
+            var showAndHideSliderBtn = document.querySelector('.showAndHideSliderBtn')
+            var btnConf = document.querySelector('#btnConf')
+
+
+            if (search = document.getElementById('searchCity').value === ""
+            || (err)) {
+                error.style.display = "block"
+                wheatherMiddle.style.display = "none"
+                wheatherFooter.style.display = "none"
+                wheatherSliderImg.style.display = "none"
+                tempSymbol.style.display = "none"
+                realFeel.style.display = "none"  
+                showAndHideSliderBtn.style.display = "none"
+                btnConf.style.display = "none"
+        }
     }
 }
 
@@ -351,7 +369,7 @@ function avarage() {
 
             }} catch (err) {
                 console.log(`Erro: ${err}`)
-            }
+        }
     }
     weatherAPI()  
 }
@@ -435,8 +453,8 @@ const imgFound = async (img) => {
 const addImgFound = async (img) => {
     const data = await imgFound(img)
     var wheatherSliderImg = document.querySelector('.wheatherSliderImg')
-    var cityFlagIdentificator = document.getElementById('cityFlagIdentificator')
-    cityFlagIdentificator.style.display = "flex"
+    var text = "A ideia aqui seria, mais pra frente, implementar um sistema de colheta de imagem e aprimoramento da API com envio de imagens"
+
 
     try{
         wheatherSliderImg.innerHTML =
@@ -470,11 +488,36 @@ const addImgFound = async (img) => {
     } catch (err) {
         wheatherSliderImg.innerHTML = `<img height="100%" width="100%" style="border-radius: 20px" src="./img/error404.png" alt="Imagem não encontrada" id="imgSlide">
                                        <p>Lamentamos, mas ainda não possuímos uma imagem deste local. Você poderia contribuir clicando logo abaixo 👀</p>
-                                       <button type="button" class="contribute">Contribuir</button>`
-        console.log(`Imagem Api Error: ${err}`)
+                                       <button type="button"
+                                       class="contribute"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="bottom"
+                                       title="${text}">Contribuir</button>`
     }
 }
 
+// IBGE NEWS API
+const newsApi = async (news) => {
+    var news = document.getElementById('searchCity').value
+    const apiURL = `https://servicodados.ibge.gov.br/api/v3/noticias/?busca=${news}`
+    const res = await fetch(apiURL)
+    const data = await res.json()
+    return data
+}
+
+const addNews = async (news) => {
+    const data = await newsApi(news)
+    var newsAbout = document.querySelector('.new')
+    try{
+        newsAbout.innerHTML = 
+        `<h5 class ="type">Notícia IBGE</h5>
+        <div class="notice">${data.items[0].titulo}.`
+        
+    } catch (err) {
+        newsAbout.innerHTML = 
+        `<h5 class ="type">Nenhuma nova pelo IBGE</h5>`
+    }
+}
 
 export default {
     openWeatherAPI: openWeatherAPI,
@@ -483,6 +526,8 @@ export default {
     weatherAPI: weatherAPI,
     avarage: avarage,
     avarageFooterClimate:avarageFooterClimate,
-    addImgFound: addImgFound
+    addImgFound: addImgFound,
+    newsApi:newsApi,
+    addNews:addNews
 
 }

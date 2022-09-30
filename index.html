@@ -9,12 +9,31 @@
     <title>Weather</title>
 </head>
 <body>
+  
+<div class="ShowTip">
+    <button type="button" class="btnShowTip">Dica</button>
+    <div class="tipAndBtn">
+      <p class="tip">Pesquisas mudam com variação de maiúsculas e caractéres especiais</p>
+      <button type="button" class="btnHideTip">←</button>
+    </div>
+  </div>
+<div class="searchContent">
+  <div class="editCity">
+    <button type="button" id="editCity">
+      <img src="/img/iconlupa.png" alt="Ícone de lupa">
+    </button>
+  </div>
+  <div class="searchCity">
+    <input type="text" class="searchCity" id="searchCity" placeholder="Escolha um local...">
+  </div>
+  <p class="error">Lugar não econtrado. Cheque a dica acima...</p>
+</div>
     <div class="wheather container">
         <div class="wheatherLeft container">
           <div class="mainWeatherTop">
             <div class="mainWeatherHeader">
               <div class="mainWeatherCity">Experiencie o mundo...</div>
-              <div class="weatherConfig">
+              <div class="weatherConfig" id="btnConf">
                 <button type="button" class="btnWeatherConfig C">° C</button>
                 <button type="button" class="btnWeatherConfig F">° F</button>
               </div>
@@ -30,7 +49,6 @@
                 <div class="mainWeatherTemperature temp"></div>
                 <div class="mainWeatherTemperature" id="tempSymbol"></div>
               </div>
-
               <div class="climate">
                 <div class="mainWeatherClimate"></div>
               </div>
@@ -180,35 +198,18 @@
           </div>
           <p class="footerText"></p>
         </div>
-    
-    
         <div class="wheatherRight container">
           <div class="wheatherRightHeader">
-            <div class="editCity">
-              <button type="button" id="editCity">
-                <img src="/img/iconlupa.png" alt="Ícone de lupa">
-              </button>
+            <div class="cityAndFlagIdentify">
+              <div class="cityIdentificator"></div>
+              <img id="cityFlagIdentificator"> 
             </div>
-            <div class="searchCity">
-              <input type="text" class="searchCity" id="searchCity" placeholder="Escolha um local...">
+            <div class="wheatherRightContent">
+              <div class="weatherSlider container">
+                <div class="wheatherSliderImg"></div>
+              </div>
             </div>
-          </div>
-          <div class="ShowTip">
-            <button type="button" class="btnShowTip">Dica</button>
-            <div class="tipAndBtn">
-              <p class="tip">Tente pesquisar sem maiúsculas ou caractéres especiais</p>
-              <button type="button" class="btnHideTip">←</button>
-            </div>
-          </div>
-          <div class="cityAndFlagIdentify">
-            <div class="cityIdentificator"></div>
-            <img id="cityFlagIdentificator">
-          </div>
-          <div class="wheatherRightContent">
-            <div class="weatherSlider container">
-              <div class="wheatherSliderImg"></div>
-            </div>
-          </div>
+            <div class="new"></div>
         </div>
       </div> 
 

@@ -49,12 +49,16 @@ mainWeatherTop.addEventListener("mouseout", () => {
 });
 
 // WORKING WITH SIDE BUTTON TO SHOW OR HIDE WEATHER RIGHTS SIDE
+var searchContent = document.querySelector('.searchContent')
+var ShowTip = document.querySelector('.ShowTip')
 btnShowSliderWeather.addEventListener("click", () => {
     btnShowSliderWeather.style.display = "none"
     btnHideSliderWeather.style.display = "block"
     wheatherRight.style.display = "block"
     wheather.style.width = '55%'  
-    mainWeatherTop.style.borderRadius = '15px 0px 15px 0px' 
+    mainWeatherTop.style.borderRadius = '15px 0px 0px 0px'
+    searchContent.style.marginLeft = '23vw'
+    ShowTip.style.marginLeft = '23vw'
     // SHOW RIGHT SIDE ANIMATION
     wheatherRight.animate ([
         {transform: 'scale(.0)'},
@@ -74,15 +78,16 @@ btnHideSliderWeather.addEventListener("click", () => {
      {transform: 'scale(0)'}
  ], {duration: 500})
  setTimeout(() => {
-     btnHideSliderWeather.style.display = "none"
+    btnHideSliderWeather.style.display = "none"
     btnShowSliderWeather.style.display = "block"
     wheatherRight.style.display = "none"
     wheather.style.width = '40%'  
-    mainWeatherTop.style.borderRadius = '15px 15px 0px 0px' 
+    mainWeatherTop.style.borderRadius = '15px 15px 0px 0px'
+    searchContent.style.marginLeft = '31vw'
+    ShowTip.style.marginLeft = '31vw'
 }, 500)
    
 });
-
 
 // SEARCH CITY
 const btnEditCity = document.querySelector('#editCity')
@@ -90,13 +95,20 @@ const searchCity = document.querySelector('.searchCity')
 var wheatherMiddle = document.querySelector('.wheatherMiddle')
 var wheatherFooter = document.querySelector('.wheatherFooter')
 var wheatherSliderImg = document.querySelector('.wheatherSliderImg')
+var error = document.querySelector('.error')
+var btnConf = document.querySelector('#btnConf')
+var showAndHideSliderBtn = document.querySelector('.showAndHideSliderBtn')
+
 
 function openWeater(){
     wheatherMiddle.style.display = "flex"
     wheatherFooter.style.display = "block"
     wheatherSliderImg.style.display = "block"
     tempSymbol.style.display = "block"
-    realFeel.style.display = "flex"
+    realFeel.style.display = "flex"  
+    btnShowSliderWeather.style.display = "block"
+    btnConf.style.display = "block"
+    showAndHideSliderBtn.style.display = "block"
 }
 
 function APIImport() {
@@ -104,7 +116,7 @@ function APIImport() {
     weatherApi.weatherAPIData()
     weatherApi.weatherAPI()
     weatherApi.addImgFound()
-
+    weatherApi.addNews()
 }
 
 btnEditCity.addEventListener("click", () => {
@@ -117,6 +129,10 @@ btnEditCity.addEventListener("click", () => {
             btnWeatherConfig.style.display = "block"
             openWeater()
             APIImport()
+            error.style.display = "none"
+            if (btnHideSliderWeather.style.display === "block") {
+                btnShowSliderWeather.style.display = "none"
+            }
     
         if(btnWeatherConfigF.style.display === "block"){
             btnWeatherConfigC.style.display = "none"
@@ -131,10 +147,14 @@ searchCity.addEventListener("keyup", (e) => {
         btnWeatherConfig.style.display = "block"
         APIImport(search)
         openWeater()
+        error.style.display = "none"
+        if (btnHideSliderWeather.style.display === "block") {
+            btnShowSliderWeather.style.display = "none"
+        }
 
         if(btnWeatherConfigF.style.display === "block"){
             btnWeatherConfigC.style.display = "none"
-        }};
+        }}
     } 
 );
 
