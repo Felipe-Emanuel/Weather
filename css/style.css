@@ -13,7 +13,7 @@ body {
 .wheather {
     margin: auto;
     background-color: rgba(0, 0, 0, 0.5);
-    width: 35%;
+    width: 55%;
     padding: 0;
     display: flex;
     font-family: poiret-one,sans-serif;
@@ -23,18 +23,16 @@ body {
 }
 
 .wheatherLeft {
-    margin: 0;
-    width: 100%;
     padding: 0;
-    height: 100%;
 }
 
 .wheatherRight {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 0 20px 20px 0;
-    transition: .5s;
+    transition: all .5s;
+    width: 0%;
+    overflow: hidden;
     display: none;
-    width: 50%;
     padding: 0;
 }
 
@@ -45,8 +43,6 @@ body {
     border-radius: 15px 15px 0px 0;
     justify-content: space-between;
     padding: 5px;
-    width: 100%;
-    height: 32%;
     margin-bottom: 3%;
 }
 
@@ -62,7 +58,6 @@ body {
 
 
 .mainWeatherCity, .mainWeatherTimer {
-    height: 40px;
     font-size: 25px;
 }
 
@@ -84,12 +79,9 @@ body {
     color: #EEE;
     font-weight: bold;
     width: 30px;
-    height: 30px;
     border-radius: 50%;
     border: 1px solid transparent;
 }
-
-
 
 .btnWeatherConfig:hover{
     transition: .5s;
@@ -145,7 +137,6 @@ body {
     align-items: center;
     display: flex;
     width: 75%;
-    height: 75px;
     margin: auto; 
 }
 
@@ -197,7 +188,6 @@ body {
 .mainWeatherFooter {
     display: flex;
     justify-content: space-between;
-    height: 20px;
     font-size: 12px;
 }
 
@@ -212,7 +202,6 @@ body {
 .wheatherMiddle {
     display: none;
     margin: auto;
-    height: 30%;
     margin-bottom: 5px;
 }
 
@@ -232,7 +221,6 @@ body {
 }
 
 .tomorrow {
-    height: 80%;
     padding: 10px;
     width: 35%;
     margin-top: 18px;
@@ -245,7 +233,6 @@ body {
 
 .todayHeader {
     display: flex;
-    height: 70%;
     align-items: center;
     padding: 10px;
 }
@@ -321,14 +308,13 @@ body {
 }
 
 .FooterHeader{
-    text-align: start;
     font-size: 20PX;
     margin-bottom: 10px;
     cursor:default;
 }
 
 .forecastOfDays{
-    display: none;
+    display: block;
 }
 
 #hideForecast {
@@ -339,7 +325,6 @@ body {
     background: transparent;
     color: #FFF;
     width: 25px;
-    height: 25px;
     border-radius: 45%;
     font-size: 15px;
     margin-left: 5px;
@@ -383,7 +368,6 @@ body {
 
 .day-1, .day-2, .day-3, .day-4, .day-5 {
     width: 20%;
-    height: 80px;
     padding: 10px;
     border-radius: 25px;
 }
@@ -459,7 +443,6 @@ body {
 
 
 .wheatherRightHeader {
-    min-height: 85px;
     display: flexbox;
     padding: 5px;
     justify-content: space-around;
@@ -469,7 +452,6 @@ body {
 #editCity {
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
-    height: 23px;
     margin-top: .8px;
     border-radius: 100%;
 }
@@ -498,15 +480,9 @@ body {
     color: #fff;
 }
 
-.wheatherRightContent {
-    width: 100%;
-    height: 70%;
-    
-}
 
 .weatherSlider {
     width: 95%;
-    height: 81%;
     margin-top: 5vh;
     padding: 0;    
 }
@@ -514,16 +490,12 @@ body {
 .wheatherSliderImg {
     text-align: center;
     display: none;
-    height: 100%;
 }
 
 .footerText {
     text-align: center;
     visibility: hidden;
     font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 0;
-
 }
 
 .avarage-1, .avarage-2, .avarage-3, .avarage-4, .avarage-5 {
@@ -557,7 +529,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 5px;
-    height: 25px;
 }
 
 #cityFlagIdentificator {
@@ -565,18 +536,24 @@ body {
 }
 
 .ShowTip {
+    display: flex;
+    align-items: center;
     font-size: 12px;
     font-family: poiret-one,sans-serif;
     color: #FFF;
     width: 390px;
-    margin-top: 25vh;
-    margin-left: 33vw;
+    margin-top: 18vh;
+    margin-left: 23vw;
+    height: 25px;
 }
 
+
 .tip {
-    display: none;
+    width: 0%;
+    height: 20px;
     font-size: 12px;
-    margin: 0
+    overflow: hidden;
+    transition: all 0.5s;
 }
 
 .tipAndBtn {
@@ -593,7 +570,7 @@ body {
 
 .searchContent {
     display: flex;
-    margin-left: 33vw;
+    margin-left: 23vw;
     margin-bottom: 5px;
     font-family: poiret-one,sans-serif;
     color: #FFF;
@@ -601,15 +578,20 @@ body {
 
 .type {
     text-align: center;
-    margin-top: 1vh;
+    margin-top: 7vh;
 }
 
 .notice {
     text-align: center;
+    height: 80px;
 }
 
 .error {
     display: none;
     margin-left: 1vw;
     font-size: 12px;
+}
+
+.errorIMG {
+    height: 100px;
 }

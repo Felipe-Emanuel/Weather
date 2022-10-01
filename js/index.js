@@ -4,43 +4,17 @@ const btnHideForecast = document.querySelector('#hideForecast')
 const btnShowForecast = document.querySelector('#showForecast')
 const btnHideSliderWeather = document.querySelector('#hideSliderWeather')
 const btnShowSliderWeather = document.querySelector('#showSliderWeather')
-const forecast = document.querySelector('.forecastOfDays')
 const wheather = document.querySelector('.wheather')
 const wheatherRight = document.querySelector('.wheatherRight')
 const footerText = document.querySelector('.footerText')
 const realFeel = document.querySelector('.realFeel')
 
-// THIS WILL WORK WITH BUTTONS SIDE BY "PREVISÃO DE 5 DIAS"
-btnHideForecast.addEventListener("click", () => {
-    btnShowForecast.style.display = "inline-block"
-    btnHideForecast.style.display = "none"
-    forecast.animate ([
-        {transform: 'scale(.8)'},
-        {transform: 'scale(.5)'},
-        {transform: 'scale(.2)'},
-        {transform: 'scale(0)'}
-    ], {duration: 500})
-    setTimeout(() => {
-        forecast.style.display = "none"
-    }, 500)
-});
-
-btnShowForecast.addEventListener("click", () => {
-    btnShowForecast.style.display = "none"
-    btnHideForecast.style.display = "inline-block"
-    forecast.style.display = "block"
-    forecast.animate ([
-        {transform: 'scale(0)'},
-        {transform: 'scale(.2)'},
-        {transform: 'scale(.5)'},
-        {transform: 'scale(.8)'}
-    ], {duration: 500})
-});
 
 // MAIN WEATHER HEADER SYMBOL ANIMATION
 const mainWeatherTop = document.querySelector('.mainWeatherTop')
 const mainWeatherTopSymbol = document.querySelector('.mainWeatherSymbol')
-mainWeatherTop.addEventListener("mouseout", () => {
+
+mainWeatherTop.addEventListener("mouseover", () => {
         mainWeatherTopSymbol.style.transition = '2s'
         mainWeatherTopSymbol.style.transform = 'translateX(-50%)'
         setTimeout(()=>{
@@ -49,43 +23,29 @@ mainWeatherTop.addEventListener("mouseout", () => {
 });
 
 // WORKING WITH SIDE BUTTON TO SHOW OR HIDE WEATHER RIGHTS SIDE
-var searchContent = document.querySelector('.searchContent')
-var ShowTip = document.querySelector('.ShowTip')
 btnShowSliderWeather.addEventListener("click", () => {
-    btnShowSliderWeather.style.display = "none"
-    btnHideSliderWeather.style.display = "block"
-    wheatherRight.style.display = "block"
-    wheather.style.width = '55%'  
-    mainWeatherTop.style.borderRadius = '15px 0px 0px 0px'
-    searchContent.style.marginLeft = '23vw'
-    ShowTip.style.marginLeft = '23vw'
+   
+    
     // SHOW RIGHT SIDE ANIMATION
-    wheatherRight.animate ([
-        {transform: 'scale(.0)'},
-        {transform: 'scale(.2)'},
-        {transform: 'scale(.5)'},
-        {transform: 'scale(.8)'}
-    ], {duration: 500})
+    wheatherRight.style.display = "block"
+    setTimeout(() => {
+        wheatherRight.style.width = '55%'
+     btnShowSliderWeather.style.display = "none"
+     btnHideSliderWeather.style.display = "block"
+     mainWeatherTop.style.borderRadius = '15px 0px 0px 0px'
+}, 50)
 
 })
 
 btnHideSliderWeather.addEventListener("click", () => {
     // HIDE RIGHT SIDE ANIMATION
-    wheatherRight.animate ([
-     {transform: 'scale(.8)'},
-     {transform: 'scale(.5)'},
-     {transform: 'scale(.2)'},
-     {transform: 'scale(0)'}
- ], {duration: 500})
- setTimeout(() => {
+    wheatherRight.style.width = '0%'
+    setTimeout(() => {
     btnHideSliderWeather.style.display = "none"
     btnShowSliderWeather.style.display = "block"
     wheatherRight.style.display = "none"
-    wheather.style.width = '40%'  
     mainWeatherTop.style.borderRadius = '15px 15px 0px 0px'
-    searchContent.style.marginLeft = '31vw'
-    ShowTip.style.marginLeft = '31vw'
-}, 500)
+}, 550)
    
 });
 
@@ -233,17 +193,16 @@ var btnShowTip = document.querySelector('.btnShowTip')
 var btnHideTip = document.querySelector('.btnHideTip')
 var tip = document.querySelector('.tip')
 
-
 btnShowTip.addEventListener("click", () => {
-        tip.style.display = "block" 
         btnHideTip.style.display = "flex"
+        tip.style.width = '100%'
         btnShowTip.style.display = "none"
-
 })
 
 btnHideTip.addEventListener("click", () => {
-        tip.style.display = "none"
-        btnHideTip.style.display = "none"
-        btnShowTip.style.display = "block"
-    
+        tip.style.width = '0%'
+        setTimeout(() => {
+            btnHideTip.style.display = "none"
+            btnShowTip.style.display = "block"
+        },550)
 })

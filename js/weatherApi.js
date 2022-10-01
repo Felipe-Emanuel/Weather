@@ -487,7 +487,7 @@ const addImgFound = async (img) => {
 
     } catch (err) {
         wheatherSliderImg.innerHTML = `<img height="100%" width="100%" style="border-radius: 20px" src="./img/error404.png" alt="Imagem não encontrada" id="imgSlide">
-                                       <p>Lamentamos, mas ainda não possuímos uma imagem deste local. Você poderia contribuir clicando logo abaixo 👀</p>
+                                       <p class="errorIMG">Lamentamos, mas ainda não possuímos uma imagem deste local. Você poderia contribuir clicando logo abaixo 👀</p>
                                        <button type="button"
                                        class="contribute"
                                        data-bs-toggle="tooltip"
