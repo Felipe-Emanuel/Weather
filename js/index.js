@@ -89,7 +89,9 @@ btnEditCity.addEventListener("click", () => {
             btnWeatherConfig.style.display = "block"
             openWeater()
             APIImport()
+            startQueries()
             error.style.display = "none"
+
             if (btnHideSliderWeather.style.display === "block") {
                 btnShowSliderWeather.style.display = "none"
             }
@@ -107,7 +109,9 @@ searchCity.addEventListener("keyup", (e) => {
         btnWeatherConfig.style.display = "block"
         APIImport(search)
         openWeater()
+        startQueries()
         error.style.display = "none"
+
         if (btnHideSliderWeather.style.display === "block") {
             btnShowSliderWeather.style.display = "none"
         }
@@ -206,3 +210,24 @@ btnHideTip.addEventListener("click", () => {
             btnShowTip.style.display = "block"
         },550)
 })
+
+// THIS WILL WORK WITH RESPONSIVE AT 1200PX AND DESAPEAR WITH RIGHT SIDE OF THE WEATHER
+var showAndHideSliderBtn = document.querySelector('.showAndHideSliderBtn')
+const startQueries = () => {
+    let newQuery = window.matchMedia ('(max-width: 1200px)')
+
+    const queryListenChanges = query => {
+        
+        if (query.matches) {
+            showAndHideSliderBtn.style.display = "none"
+            wheatherRight.style.display = "none"
+        } else {
+            showAndHideSliderBtn.style.display = "block"
+            wheatherRight.style.display = "block"
+            
+        }
+    }
+
+    newQuery.addListener(queryListenChanges)
+    queryListenChanges(newQuery)
+}

@@ -265,7 +265,7 @@ try {
                 feelsLike.innerHTML = `Sensação real de:`
                 FeelsTemp.innerHTML = ` ${CityName.data.current_condition[0].FeelsLikeF}`
                 realFeelSymbol.innerHTML = `°f`
-                mxTempAbout.innerHTML = `Máxima prevista de:`
+                mxTempAbout.innerHTML = `Máxima prevista:`
                 mainWeatherMaxTemperature.innerHTML = `${CityName.data.weather[0].maxtempF}`
                 mxTempSymbol.innerHTML = `°f`
                 todayMaxTemperature.innerHTML = `${CityName.data.weather[0].maxtempF}`
@@ -295,7 +295,7 @@ try {
             feelsLike.innerHTML = `Sensação real de:`
             FeelsTemp.innerHTML = ` ${CityName.data.current_condition[0].FeelsLikeC}`
             realFeelSymbol.innerHTML = `°c`
-            mxTempAbout.innerHTML = `Máxima prevista de:`
+            mxTempAbout.innerHTML = `Máxima prevista:`
             mainWeatherMaxTemperature.innerHTML = `${CityName.data.weather[0].maxtempC}`
             mxTempSymbol.innerHTML = `°c`
             todayMaxTemperature.innerHTML = `${CityName.data.weather[0].maxtempC}`
